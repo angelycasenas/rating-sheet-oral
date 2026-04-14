@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research/Capstone Oral Presentation Form</title>
+  
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  
+  <script src="config.js"></script>
+
+  <div class="toolbar" id="formToolbar">
+    <button type="button" onclick="window.print()">Print Form</button>
+    <button type="button" onclick="fillSample()">Fill Sample Data</button>
+    <button type="button" onclick="clearForm()">Clear Form</button>
+    <button type="button" onclick="goToViewAllRates()">View All Rates</button>
+  </div>
+
+  <div class="toolbar hidden" id="ratesToolbar">
+    <button type="button" onclick="goToFormPage()">Back to Form</button>
+    <button type="button" onclick="loadAllRates(true)">Refresh Rates</button>
+  </div>
+
+  <div class="toolbar hidden" id="detailsToolbar">
+    <button type="button" onclick="goToViewAllRates()">Back to All Rates</button>
+    <button type="button" onclick="window.print()">Print Details</button>
+  </div>
+
+  <div class="page" id="formPage">
+    <div class="header-wrap">
+      <img src="assets/images/header.png" alt="Header" class="header-image" />
+    </div>
+
+    <h1>RESEARCH/CAPSTONE ORAL PRESENTATION FORM</h1>
+
+    <div class="info-row">
+      <label>Evaluator: <input class="input-line medium" id="evaluator" type="text" required /></label>
+      <label>Time: <input class="input-line" id="time" type="text" readonly required /></label>
+      <label>Date: <input class="input-line" id="date" type="date" readonly required /></label>
+      <label>Signature: <input class="input-line" id="signature" type="text" required /></label>
+    </div>
+
+    <div class="info-row">
+      <label style="width:100%;">Research/Capstone Project Proposal Title:
+        <select class="select-line long" id="title" required>
+          <option value="">-- Select Project Title --</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="section-label">Group Members Name</div>
+
+    <table id="evaluationTable">
+      <thead id="evalThead"></thead>
+      <tbody id="evalTbody"></tbody>
+    </table>
+
+    <div class="section-label">General Comments</div>
+    <textarea id="generalComments" required></textarea>
+    <div class="status" id="status"></div>
+    <div style="margin-top: 16px; text-align:center;">
+      <button type="button" onclick="submitToGoogleSheet()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer;">
+        SAVE DATA
+      </button>
+    </div>
+
+    <div class="footer-wrap">
+      <img src="assets/images/footer.png" alt="Footer" class="footer-image" />
+    </div>
+  </div>
+
+  <div class="page hidden" id="ratesPage">
+    <div class="header-wrap">
+      <img src="assets/images/header.png" alt="Header" class="header-image" />
+    </div>
+    <h1>ALL ORAL PRESENTATION EVALUATIONS</h1>
+    <div class="page-subtitle">Saved Data</div>
+    <div class="table-wrap">
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Evaluator</th>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Signature</th>
+            <th>Title</th>
+            <th>Overall Group Score</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="ratesTableBody">
+          <tr><td colspan="9" class="center">No data loaded yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer-wrap">
+      <img src="assets/images/footer.png" alt="Footer" class="footer-image" />
+    </div>
+  </div>
+
+  <div class="page hidden" id="detailsPage">
+    <div class="header-wrap">
+      <img src="assets/images/header.png" alt="Header" class="header-image" />
+    </div>
+    <h1>RESEARCH/CAPSTONE ORAL PRESENTATION FORM</h1>
+    <div class="info-row">
+      <label>Evaluator: <span class="input-line medium" id="detailEvaluator"></span></label>
+      <label>Time: <span class="input-line" id="detailTime"></span></label>
+      <label>Date: <span class="input-line" id="detailDate"></span></label>
+      <label>Signature: <span class="input-line" id="detailSignature"></span></label>
+    </div>
+    <div class="info-row">
+      <label style="width:100%;">Research/Capstone Project Proposal Title:
+        <span class="input-line long" id="detailTitle"></span>
+      </label>
+    </div>
+    <div class="section-label">Group Members Name</div>
+    <table id="detailsEvaluationTable">
+      <thead id="detailsThead"></thead>
+      <tbody id="detailsScoresBody"></tbody>
+    </table>
+    <div class="section-label">General Comments</div>
+    <div class="display-box" id="detailGeneralComments"></div>
+    <div class="footer-wrap">
+      <img src="assets/images/footer.png" alt="Footer" class="footer-image" />
+    </div>
+  </div>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

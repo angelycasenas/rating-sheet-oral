@@ -1,0 +1,69 @@
+
+:root {
+  --dark: #222;
+  --line: #333;
+  --light: #f7f7f7;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+body { padding: 12px; font-family: "Times New Roman", serif; color: var(--dark); background: #ffffff; }
+.toolbar, .status, .page { width: 100%; max-width: 1400px; margin-left: auto; margin-right: auto; }
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+button { padding: 10px 14px; border: 1px solid #bbb; background: rgb(1, 198, 252); cursor: pointer; font-family: inherit; font-size: 14px; border-radius: 6px; min-height: 42px; flex: 1 1 180px; }
+button:hover { background: #f3f3f3; }
+.status { margin-bottom: 12px; font-size: 14px; min-height: 18px; font-weight: bold; word-break: break-word; }
+.page { border: 1px solid #ddd; padding: 16px; background: #fff; }
+.header-image, .footer-image { width: 100%; height: auto; display: block; }
+.footer-image { max-width: 220px; }
+.header-wrap { margin-bottom: 16px; }
+.footer-wrap { margin-top: 20px; }
+h1 { text-align: center; font-size: 18px; margin: 16px 0; letter-spacing: 0.2px; line-height: 1.3; }
+.page-subtitle { text-align: center; margin-top: -6px; margin-bottom: 20px; font-size: 14px; font-weight: bold; }
+.info-row { margin: 8px 0; font-size: 14px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.info-row label { display: block; width: 100%; }
+.input-line, .select-line { border: none; border-bottom: 1px solid #000; min-width: 0; width: 100%; font: inherit; background: transparent; outline: none; padding: 4px; display: inline-block; min-height: 24px; word-break: break-word; }
+.input-line.medium, .input-line.long, .select-line.long { min-width: 0; width: 100%; max-width: 100%; }
+.section-label { margin: 18px 0 8px; font-size: 15px; font-weight: bold; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; table-layout: fixed; }
+th, td { border: 1px solid var(--line); padding: 8px 4px; vertical-align: middle; text-align: center; word-wrap: break-word; overflow-wrap: break-word; }
+th { background: var(--light); }
+td.left { text-align: left; vertical-align: top; }
+td.member-name { font-weight: bold; font-size: 12px; }
+input[type="number"] { width: 100%; max-width: 64px; padding: 4px; font: inherit; text-align: center; }
+textarea { width: 100%; min-height: 120px; font: inherit; padding: 10px; border: 1px solid #aaa; resize: vertical; }
+.display-box { border: 1px solid #aaa; min-height: 120px; font: inherit; padding: 10px; white-space: pre-wrap; text-align: left; word-break: break-word; }
+.hidden { display: none; }
+.table-wrap { width: 100%; overflow: hidden; margin-top: 12px; }
+.rates-table { width: 100%; table-layout: fixed; }
+.rates-table th, .rates-table td { white-space: normal; font-size: 12px; word-break: break-word; }
+.rates-table td.wrap { white-space: normal; min-width: 0; }
+.rates-table button { width: 100%; min-width: unset; flex: unset; }
+
+@media (max-width: 768px) {
+  table th, table td { padding: 6px 3px; font-size: 11px; }
+  table th:first-child, table td:first-child { width: 28%; }
+  input[type="number"] { max-width: 52px; font-size: 11px; padding: 3px; }
+  td.member-name { font-size: 11px; }
+}
+@media (min-width: 640px) {
+  body { padding: 18px; }
+  h1 { font-size: 20px; }
+  .page-subtitle, .info-row, .section-label { font-size: 15px; }
+  table, .rates-table th, .rates-table td { font-size: 13px; }
+}
+@media (min-width: 900px) {
+  body { padding: 24px; }
+  .page { padding: 22px 24px 30px; }
+  h1 { font-size: 22px; margin: 20px 0 20px; letter-spacing: 0.4px; }
+  .page-subtitle, .info-row { font-size: 15px; }
+  table, .rates-table th, .rates-table td { font-size: 14px; }
+  td.member-name { font-size: 13px; }
+  .footer-image { width: 25%; max-width: 280px; }
+  input[type="number"] { max-width: 70px; }
+}
+@media print {
+  html, body { overflow: visible; }
+  body { padding: 0; }
+  .toolbar, .status { display: none; }
+  .page { width: 100%; border: none; padding: 12px 18px 20px; }
+}

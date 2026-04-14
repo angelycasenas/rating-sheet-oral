@@ -1,0 +1,112 @@
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+    if (!e || !e.postData || !e.postData.contents) {
+      throw new Error("No POST data received.");
+    }
+
+    const data = JSON.parse(e.postData.contents);
+
+    const headers = [
+      "evaluator",
+      "time",
+      "date",
+      "signature",
+      "title",
+      "groupMembersJson",
+      "scoresJson",
+      "overallGroupScore",
+      "generalComments",
+      "createdAt"
+    ];
+
+    const firstRow = sheet.getRange(1, 1, 1, headers.length).getValues()[0];
+    const headerMissing = headers.some((header, index) => firstRow[index] !== header);
+
+    if (headerMissing) {
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    }
+
+    sheet.appendRow([
+      data.evaluator || "",
+      data.time || "",
+      data.date || "",
+      data.signature || "",
+      data.title || "",
+      data.groupMembersJson || "{}",
+      data.scoresJson || "{}",
+      data.overallGroupScore || 0,
+      data.generalComments || "",
+      data.createdAt || new Date().toISOString()
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: true,
+        message: "Data saved successfully"
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        message: error.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  try {
+    const action = e && e.parameter ? e.parameter.action : "";
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+    if (action === "getAllRates") {
+      const lastRow = sheet.getLastRow();
+      const lastColumn = sheet.getLastColumn();
+
+      if (lastRow < 2) {
+        return ContentService
+          .createTextOutput(JSON.stringify({
+            success: true,
+            data: []
+          }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+
+      const values = sheet.getRange(1, 1, lastRow, lastColumn).getValues();
+      const headers = values[0];
+      const rows = values.slice(1).map(row => {
+        const obj = {};
+        headers.forEach((header, index) => {
+          obj[header] = row[index];
+        });
+        return obj;
+      });
+
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: true,
+          data: rows
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: true,
+        message: "Script is running."
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        message: error.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
