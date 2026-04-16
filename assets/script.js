@@ -93,13 +93,13 @@ function memberTotal(index) {
 }
 function updateTotals() {
   let grandTotal = 0;
+
   for (let i = 1; i <= groupMembers.length; i++) {
     const total = memberTotal(i);
     document.getElementById(`totalMember${i}`).textContent = total;
     grandTotal += total;
   }
-  const overallAverage = (grandTotal / groupMembers.length).toFixed(2);
-  document.getElementById("overallGroupScore").textContent = overallAverage;
+  document.getElementById("overallGroupScore").textContent = grandTotal;
 }
 
 // --- PAYLOAD BUILDERS ---
